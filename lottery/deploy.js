@@ -1,25 +1,25 @@
-const HDWalletProvider=require('truffle-hdwallet-provider');
-const Web3=require('web3');
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
-const InitialMessage='Hello World';
+const InitialMessage = 'Hello World';
 
-const provider=new HDWalletProvider(
-'cattle field steak paddle window tongue kingdom west vintage style mean mistake',
-'https://rinkeby.infura.io/v3/e05b135ce19247ada5b0df045bad0be1');
+const provider = new HDWalletProvider(
+  'cattle field steak paddle window tongue kingdom west vintage style mean mistake',
+  'https://rinkeby.infura.io/v3/e05b135ce19247ada5b0df045bad0be1');
 
 const web3 = new Web3(provider);
 
-const deploy=async()=>{
+const deploy = async () => {
 
-    accounts = await web3.eth.getAccounts();
+  accounts = await web3.eth.getAccounts();
 
-    console.log('Attempting to deploy from account',accounts[0]);
+  console.log('Attempting to deploy from account', accounts[0]);
 
-  const result= await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: bytecode})
-    .send({  gas: '1000000' ,from: accounts[0]});
-
-    console.log('contract deploy to ',result.options.address);
+  const result = await new web3.eth.Contract(JSON.parse(interface))
+    .deploy({ data: bytecode })
+    .send({ gas: '1000000', from: accounts[0] });
+  console.log(interface);
+  console.log('contract deploy to ', result.options.address);
 };
 
 deploy();
